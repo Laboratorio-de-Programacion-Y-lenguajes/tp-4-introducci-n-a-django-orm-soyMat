@@ -21,22 +21,15 @@ class Categoria(models.Model):
 
 
 class Libro(models.Model):
-    """
-    Libro del catálogo de la biblioteca.
-    Tiene relación N:1 con Autor y N:M con Categoria.
-    """
+    titulo = models.CharField(max_length=200)
+    isbn = models.CharField(max_length=20, unique=True)
+    fecha_publicacion = models.DateField()
+    cantidad_total = models.PositiveIntegerField()
+    autor = models.ForeignKey(Autor, on_delete=models.PROTECT)
+    categorias = models.ManyToManyField(Categoria)
 
-    # TODO: implementar los campos:
-    # titulo          → CharField
-    # isbn            → CharField (unique=True)
-    # fecha_publicacion → DateField
-    # cantidad_total  → PositiveIntegerField
-    # autor           → ForeignKey(Autor, on_delete=models.PROTECT)
-    # categorias      → ManyToManyField(Categoria)
-    #
-    # Preguntas guía:
-    # ¿Qué pasa si eliminás un autor que tiene libros? (PROTECT vs CASCADE)
-    # ¿Por qué isbn debe ser único?
+    def __str__(self) -> str:
+        return self.titulo
 
     pass
 
