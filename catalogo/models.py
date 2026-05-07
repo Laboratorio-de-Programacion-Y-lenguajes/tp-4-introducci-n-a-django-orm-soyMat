@@ -5,38 +5,19 @@ from django.utils import timezone
 
 
 class Autor(models.Model):
-    """
-    Representa a un autor/a.
-    Requerido: nombre, email único, biografía opcional.
-    """
+    nombre = models.CharField(max_length=150)
+    email = models.EmailField(unique=True)
+    biografia = models.TextField(blank=True)
 
-    # TODO: implementar los campos del modelo
-    # Ejemplo de campo:
-    # nombre = models.CharField(max_length=120)
-    #
-    # nombre   → CharField (max_length a elección)
-    # email    → EmailField (unique=True)
-    # biografia → TextField (blank=True para hacerlo opcional)
-
-    pass
-
-    # Opcional: definir __str__ para que sea legible en el admin y en el shell
-    # def __str__(self) -> str:
-    #     return self.nombre
+    def __str__(self) -> str:
+        return self.nombre
 
 
 class Categoria(models.Model):
-    """
-    Categoría temática de libros.
-    Ejemplos: 'fantasía', 'ciencia ficción', 'historia'.
-    """
+    nombre = models.CharField(max_length=100, unique=True)
 
-    # TODO: implementar el campo nombre (unique=True)
-
-    pass
-
-    # def __str__(self) -> str:
-    #     return self.nombre
+    def __str__(self) -> str:
+        return self.nombre
 
 
 class Libro(models.Model):
